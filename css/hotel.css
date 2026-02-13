@@ -1,0 +1,147 @@
+/* hotel.css — Homepage only (Luxury / Clean)
+   Notes:
+   - Hero uses a soft "ken burns" motion (reduced on prefers-reduced-motion)
+   - Feature cards have subtle image zoom + micro-lift
+*/
+
+.hero{
+  position:relative;
+  min-height: 90vh;
+  min-height: 90svh;
+  display:grid;
+  align-items:end;
+  padding: 0 0 var(--space-7);
+  overflow:hidden;
+}
+
+/* Background photo (replace: /assets/hero.jpg) */
+.hero__media{
+  position:absolute;
+  inset:0;
+  background-image:url("../assets/hero.jpg");
+  background-size:cover;
+  background-position:center;
+  transform: scale(1.04);
+  filter: saturate(1.03) contrast(1.02);
+  animation: heroKenBurns 18s var(--ease) infinite alternate;
+}
+@keyframes heroKenBurns{
+  from{ transform: scale(1.05) translate3d(0,0,0); }
+  to{ transform: scale(1.12) translate3d(-1.2%, -1.4%, 0); }
+}
+
+.hero__veil{
+  position:absolute;
+  inset:0;
+  /* Luxury fade: dark at top → clean white at bottom */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.36), rgba(0,0,0,.12) 55%, rgba(240, 235, 223,.96)),
+    radial-gradient(900px 520px at 10% 10%, rgba(var(--primary-rgb),.16), transparent 60%);
+}
+
+.hero__content{
+  position:relative;
+  z-index:2;
+  padding-top: var(--space-8);
+}
+
+.hero__title{
+  margin: 0 0 var(--space-4);
+  font-weight: 600;
+  font-size: var(--fs-900);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: rgba(255,255,255,.94);
+  text-shadow: 0 18px 60px rgba(0,0,0,.30);
+}
+
+.hero__lead{
+  margin: 0 0 var(--space-5);
+  font-size: var(--fs-600);
+  color: rgba(255,255,255,.84);
+  max-width: 60ch;
+}
+
+.hero__cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Feature grid */
+.feature-grid{
+  display:grid;
+  gap: var(--space-5);
+}
+
+.feature-card{
+  overflow:hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(255,255,255,.64);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: none;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+.feature-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(var(--primary-rgb), .22);
+  box-shadow: none;
+}
+.feature-card::before,
+.feature-card::after{
+  box-shadow: none;
+  filter: none;
+}
+
+.feature-card__media{
+  height: 260px;
+  background-size:cover;
+  background-position:center;
+  transform: scale(1.02);
+  transition: transform .6s var(--ease), filter .6s var(--ease);
+  filter: saturate(1.02);
+}
+.feature-card:hover .feature-card__media{
+  transform: scale(1.06);
+  filter: saturate(1.06);
+}
+
+.feature-card__body{ padding: var(--space-5); }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .hero__media{ animation:none; transform: scale(1.04); }
+  .feature-card, .feature-card__media{ transition:none; }
+}
+
+@media (max-width: 767px){
+  .hero__media{ animation:none; transform: scale(1.04); }
+}
+
+@media (max-width: 640px){
+  .hero{ min-height: 72vh; min-height: 72svh; padding-bottom: var(--space-6); }
+  .hero__content{ padding-top: var(--space-7); }
+  .hero__title{ font-size: var(--fs-900); line-height: 1.08; }
+  .hero__lead{ margin-bottom: var(--space-4); }
+  .hero__cta{ display:grid; gap:10px; }
+  .hero__cta .btn{ width:100%; }
+
+  .feature-grid{ gap: var(--space-4); }
+  .feature-card__media{ height: 210px; }
+  .feature-card__body{ padding: var(--space-4); }
+}
+
+/* Responsive */
+@media (min-width: 768px){
+  .feature-grid{ grid-template-columns: repeat(2, 1fr); }
+  .feature-card__media{ height: 280px; }
+  .hero__title{ font-size: clamp(2.4rem, 4.2vw, 4.1rem); }
+}
+@media (min-width: 1024px){
+  .feature-grid{ grid-template-columns: repeat(3, 1fr); }
+  .feature-card__media{ height: 300px; }
+}

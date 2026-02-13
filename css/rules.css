@@ -1,0 +1,49 @@
+/* rules.css — Rules page only */
+.page-hero--rules .page-hero__media{
+  /* Optional photo placeholder */
+  background-image:url("../assets/hero.jpg");
+}
+
+.rules-grid{
+  display:grid;
+  gap: var(--space-5);
+}
+.rule-card{
+  padding: var(--space-5);
+  display:flex;
+  gap: 14px;
+}
+.rule-ico{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(0,100,95,.25);
+  background: rgba(0,100,95,.06);
+  flex: 0 0 auto;
+}
+.rule-body{ min-width: 0; }
+.rule-title{
+  font-weight:600;
+  letter-spacing:.04em;
+  margin:0 0 4px;
+}
+.rule-text{
+  margin:0;
+  color: rgba(0,0,0,.72);
+}
+@media (max-width: 640px){
+  .rules-grid{ gap: var(--space-4); }
+  .rule-card{ padding: var(--space-4); gap:12px; }
+  .rule-ico{ width:36px; height:36px; }
+  .rule-title{ font-size: 1rem; }
+  .rule-text{ font-size: .95rem; }
+}
+@media (min-width: 768px){
+  .rules-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px){
+  .rules-grid{ grid-template-columns: repeat(3, 1fr); }
+}
